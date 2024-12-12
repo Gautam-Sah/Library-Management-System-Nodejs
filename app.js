@@ -9,11 +9,12 @@ const helmet = require('helmet')
 const cors = require('cors')
 const xss = require('xss-clean')
 const rateLimiter = require('express-rate-limit')
-// const router = require('')
+
 //connectDB
 const connectDb = require('./DB/connect')
 
 // Router
+const book = require('./routes/book')
 
 //Error Handler
 
@@ -31,7 +32,7 @@ app.use(
 app.use(express.json())
 app.use(express.static('./public'))
 
-// app.use('/api/v1', router)
+app.use('/api/v1', book)
 
 app.get('/', (req, res) => res.send('Library Management System'))
 
