@@ -1,23 +1,39 @@
 const Book = require('../models/books')
+const statusCodes = require('http-status-codes')
+
+// handle errors
 
 const getAllBooks = async (req, res) => {
-  res.send('get all books')
+  books = await Book.find({})
+  res.status(statusCodes.OK).json({ books, count: books.length })
+  // add filters
 }
 
 const getBook = async (req, res) => {
-  res.send('get book')
+  const bookId = req.params.id
+  const book = await Book.findOne({ _id: bookId })
+  // const book = await Book.findById(bookId)
+  res.status(statusCodes.OK).json({ book })
 }
 
 const createBook = async (req, res) => {
-  res.send(' create books')
+  const book = await Book.create(req.body)
+  res.status(statusCodes.CREATED).json({ book })
 }
 
 const updateBook = async (req, res) => {
-  res.send('update books')
+  const bookId = req.params.id
+  const book = await Book.findOneAndUpdate({ _id: bookId }, req.body, {
+    runValidators: true,
+    new: true,
+  })
+  res.status(statusCodes.OK).json({ update: 'true', updated_book: book })
 }
 
 const deleteBook = async (req, res) => {
-  res.send('delete books')
+  const bookId = req.params.id
+  const book = await Book.findOneAndDelete({ _id: bookId })
+  res.status(statusCodes.OK).json({ delete: 'success', deleted_book: book })
 }
 
 module.exports = {

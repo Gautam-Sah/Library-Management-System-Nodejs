@@ -8,7 +8,7 @@ const bookSchema = mongoose.Schema({
   },
   author: {
     type: String,
-    required: [true, 'Name is required'],
+    required: [true, 'Author Name is required'],
     maxlength: 500,
   },
   category: {
@@ -18,6 +18,7 @@ const bookSchema = mongoose.Schema({
   sub_category: {
     type: String,
   },
+  no_of_pages: Number,
 })
 
 module.exports = mongoose.model('Book', bookSchema)
