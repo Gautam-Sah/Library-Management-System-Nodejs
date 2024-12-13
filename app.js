@@ -14,7 +14,7 @@ const rateLimiter = require('express-rate-limit')
 const connectDb = require('./DB/connect')
 
 // Router
-const book = require('./routes/book')
+const books = require('./routes/books')
 
 //Error Handler
 
@@ -32,7 +32,7 @@ app.use(
 app.use(express.json())
 app.use(express.static('./public'))
 
-app.use('/api/v1', book)
+app.use('/api/v1', books)
 
 app.get('/', (req, res) => res.send('Library Management System'))
 
