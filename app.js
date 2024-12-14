@@ -17,6 +17,8 @@ const connectDb = require('./DB/connect')
 const books = require('./routes/books')
 
 //Error Handler
+const errorHandler = require('./middlewares/error-handler')
+const notFound = require('./middlewares/not-found')
 
 app.use(helmet())
 app.use(cors())
@@ -33,6 +35,10 @@ app.use(express.json())
 app.use(express.static('./public'))
 
 app.use('/api/v1', books)
+
+app.use(errorHandler)
+
+app.use(notFound)
 
 app.get('/', (req, res) => res.send('Library Management System'))
 
